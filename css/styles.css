@@ -1,0 +1,559 @@
+
+/* ========================================
+   VITAFLOW - DISEÑO PRINCIPAL
+   ======================================== */
+
+/* 1. COLORES Y CONFIGURACIÓN GENERAL */
+
+:root {
+    --verde-oscuro: #263f2b;
+    --verde: #49694a;
+    --verde-salvia: #a8b59a;
+    --verde-claro: #e7ecdf;
+    --beige: #f4f0e8;
+    --blanco: #fffdf8;
+    --naranja: #d98b43;
+    --texto: #343a30;
+    --texto-suave: #74766c;
+    --sombra: 0 8px 28px rgba(38, 63, 43, 0.09);
+    --radio: 22px;
+}
+
+/* Hace que los tamaños sean más fáciles de controlar */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Desplazamiento suave al pulsar los enlaces */
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+/* Aspecto general de toda la página */
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: var(--beige);
+    color: var(--texto);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* Selección de texto */
+
+::selection {
+    background: var(--verde-salvia);
+    color: var(--verde-oscuro);
+}
+
+/* Estilo de los enlaces */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Imágenes adaptables */
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* 2. BARRA DE NAVEGACIÓN */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(244, 240, 232, 0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(38, 63, 43, 0.08);
+}
+
+nav {
+    width: min(1180px, 92%);
+    min-height: 82px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.logo {
+    color: var(--verde-oscuro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: -1.5px;
+    white-space: nowrap;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    list-style: none;
+}
+
+nav ul a {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto-suave);
+    transition: color 0.25s ease;
+}
+
+nav ul a:hover {
+    color: var(--naranja);
+}
+
+.boton-nav {
+    background: var(--verde-oscuro);
+    color: white;
+    padding: 11px 23px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.boton-nav:hover {
+    background: var(--verde);
+    transform: translateY(-3px);
+}
+
+/* 3. PORTADA PRINCIPAL */
+
+.portada {
+    width: min(1180px, 92%);
+    min-height: 540px;
+    margin: 38px auto 65px;
+    padding: 55px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 45px;
+    background: linear-gradient(135deg, #e5e9dc, #f5ead9);
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.portada::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border: 1px solid rgba(73, 105, 74, 0.17);
+    border-radius: 50%;
+    top: -130px;
+    left: -90px;
+    pointer-events: none;
+}
+
+.portada-texto {
+    position: relative;
+    z-index: 1;
+    animation: aparecerIzquierda 0.9s ease both;
+}
+
+.etiqueta {
+    color: var(--verde);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.portada h1 {
+    max-width: 560px;
+    color: var(--verde-oscuro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(38px, 4.5vw, 62px);
+    line-height: 1.12;
+    letter-spacing: -1.8px;
+    margin-bottom: 22px;
+}
+
+.portada-texto > p:not(.etiqueta) {
+    max-width: 440px;
+    color: var(--texto-suave);
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.boton-principal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--verde-oscuro);
+    color: white;
+    padding: 14px 27px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 7px 17px rgba(38, 63, 43, 0.17);
+    transition: transform 0.25s ease, box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.boton-principal:hover {
+    background: var(--verde);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 22px rgba(38, 63, 43, 0.2);
+}
+
+.portada-imagen {
+    height: 390px;
+    animation: aparecerDerecha 1s ease both;
+}
+
+.portada-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 180px 180px 24px 24px;
+    box-shadow: var(--sombra);
+    transition: transform 0.5s ease;
+}
+
+.portada-imagen img:hover {
+    transform: scale(1.025);
+}
+
+/* 4. SECCIONES GENERALES */
+
+.seccion {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+    padding: 65px 0;
+    text-align: center;
+}
+
+.seccion > .etiqueta {
+    margin-bottom: 10px;
+}
+
+.seccion h2 {
+    color: var(--verde-oscuro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(29px, 3.5vw, 43px);
+    line-height: 1.25;
+    margin-bottom: 16px;
+}
+
+.descripcion {
+    max-width: 600px;
+    margin: 0 auto 36px;
+    color: var(--texto-suave);
+    font-size: 15px;
+}
+
+/* 5. TARJETAS */
+
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    margin-top: 38px;
+    text-align: left;
+}
+
+.tarjeta {
+    padding: 30px 27px;
+    background: var(--blanco);
+    border: 1px solid rgba(38, 63, 43, 0.07);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    transition: transform 0.3s ease, box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    animation: aparecer 0.7s ease both;
+}
+
+.tarjeta:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 17px 38px rgba(38, 63, 43, 0.13);
+    border-color: rgba(73, 105, 74, 0.3);
+}
+
+.tarjeta-icono {
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    border-radius: 50%;
+    background: var(--verde-claro);
+    font-size: 31px;
+    transition: transform 0.3s ease;
+}
+
+.tarjeta:hover .tarjeta-icono {
+    transform: rotate(-8deg) scale(1.08);
+}
+
+.tarjeta h3 {
+    color: var(--verde-oscuro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 23px;
+    line-height: 1.3;
+    margin-bottom: 12px;
+}
+
+.tarjeta p {
+    color: var(--texto-suave);
+    font-size: 14px;
+    margin-bottom: 23px;
+}
+
+.boton-tarjeta {
+    border: none;
+    background: var(--verde-oscuro);
+    color: white;
+    padding: 11px 20px;
+    border-radius: 25px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.boton-tarjeta:hover {
+    background: var(--naranja);
+    transform: translateY(-2px);
+}
+
+/* 6. SECCIÓN DE ALIMENTACIÓN */
+
+.seccion-alimentacion {
+    width: min(1180px, 92%);
+    margin: 40px auto;
+    padding: 75px 35px;
+    background: linear-gradient(135deg, #e0e7d8, #f3dfc8);
+    border-radius: 30px;
+}
+
+.seccion-alimentacion .descripcion {
+    margin-bottom: 28px;
+}
+
+/* 7. PIE DE PÁGINA */
+
+footer {
+    margin-top: 50px;
+    padding: 38px 5%;
+    background: var(--verde-oscuro);
+    color: #f8f4e9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+footer p {
+    font-size: 13px;
+}
+
+footer a {
+    color: #f1b36c;
+    font-size: 13px;
+    font-weight: 700;
+    transition: color 0.25s ease;
+}
+
+footer a:hover {
+    color: white;
+}
+
+/* 8. ANIMACIONES */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes aparecerIzquierda {
+    from {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes aparecerDerecha {
+    from {
+        opacity: 0;
+        transform: translateX(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 9. ADAPTACIÓN PARA TABLETAS */
+
+@media (max-width: 900px) {
+    nav {
+        gap: 15px;
+    }
+
+    nav ul {
+        gap: 13px;
+    }
+
+    nav ul a {
+        font-size: 12px;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .portada {
+        padding: 38px;
+        gap: 28px;
+    }
+
+    .portada-imagen {
+        height: 330px;
+    }
+
+    .tarjetas {
+        gap: 16px;
+    }
+
+    .tarjeta {
+        padding: 23px 19px;
+    }
+}
+
+/* 10. ADAPTACIÓN PARA CELULARES */
+
+@media (max-width: 650px) {
+    nav {
+        width: 92%;
+        min-height: auto;
+        padding: 18px 0;
+        flex-wrap: wrap;
+    }
+
+    nav ul {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 12px 19px;
+        flex-wrap: wrap;
+    }
+
+    nav ul a {
+        font-size: 12px;
+    }
+
+    .logo {
+        font-size: 27px;
+    }
+
+    .boton-nav {
+        padding: 9px 16px;
+        font-size: 12px;
+    }
+
+    .portada {
+        width: 92%;
+        margin-top: 22px;
+        margin-bottom: 30px;
+        padding: 30px 23px;
+        grid-template-columns: 1fr;
+        gap: 28px;
+        border-radius: 23px;
+    }
+
+    .portada h1 {
+        font-size: clamp(36px, 10vw, 48px);
+        letter-spacing: -1px;
+    }
+
+    .portada-texto > p:not(.etiqueta) {
+        font-size: 14px;
+    }
+
+    .portada-imagen {
+        height: 290px;
+    }
+
+    .portada-imagen img {
+        border-radius: 130px 130px 20px 20px;
+    }
+
+    .seccion {
+        padding: 43px 0;
+    }
+
+    .seccion h2 {
+        font-size: 31px;
+    }
+
+    .descripcion {
+        font-size: 14px;
+    }
+
+    .tarjetas {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 25px;
+    }
+
+    .tarjeta {
+        padding: 26px;
+    }
+
+    .seccion-alimentacion {
+        margin: 25px auto;
+        padding: 45px 23px;
+    }
+
+    footer {
+        margin-top: 25px;
+        padding: 30px 6%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+/* 11. ACCESIBILIDAD: REDUCIR ANIMACIONES */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
